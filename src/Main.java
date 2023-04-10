@@ -1,11 +1,10 @@
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
-
-import javax.swing.*;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Scanner;
 
 public class Main {
 
@@ -24,15 +23,15 @@ public class Main {
     }
 
     public static String ArToRoman(int number) {
-        int l = map.floorKey(number);
-        if (number == l) {
+        int n = map.floorKey(number);
+        if (number == n) {
             return map.get(number);
         }
-        return map.get(l) + ArToRoman(number - l);
+        return map.get(n) + ArToRoman(number - n);
     }
 
     static void expect(String srt) {
-        JOptionPane.showMessageDialog(null, srt);
+        System.out.println(srt);
         System.exit(1);
     }
 
@@ -139,14 +138,18 @@ public class Main {
             if (trm > 0) {
                 return (exp + " = " + ArToRoman((trm)));
             } else {
-                expect("Отрицательное значение для римских чисел.");
+                expect("Отрицательное или нулевое значение для римских чисел.");
             }
         } else expect("Неверное выражение.");
         return (null);
+
     }
 
     public static void main(String[] args) {
-        String exp = JOptionPane.showInputDialog("Введите выражение");
+        Scanner input = new Scanner(System.in);
+        System.out.print("Введите выражение: ");
+        String exp;
+        exp = input.nextLine();
         System.out.println(calc(exp));
     }
 }
